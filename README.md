@@ -2,7 +2,7 @@
 
 [ ] Your app should have a browser client allowing users to write a post with a title, a pseudonym and a body.
 
-[ ] No login should be required to create a post or visit a post.
+[x] No login should be required to create a post or visit a post.
 
 [ ] When a user hits 'publish', the post should be stored in a database and the client redirected to a show path.
 
