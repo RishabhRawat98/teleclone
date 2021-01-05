@@ -7,3 +7,5 @@ CREATE TABLE tele (
     body VARCHAR NOT NULL,
 )
 
+
+
