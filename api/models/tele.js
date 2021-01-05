@@ -30,3 +30,5 @@ class Tele {
 
     }
 }
+
+module.exports = Tele;
