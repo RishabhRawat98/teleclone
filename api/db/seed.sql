@@ -5,7 +5,7 @@ CREATE TABLE tele (
     title VARCHAR (200) NOT NULL,
     user VARCHAR(200) NOT NULL,
     body VARCHAR NOT NULL,
-    ts DATE DEFAULT NOW()::DATE,
+    -- ts DATE DEFAULT NOW()::DATE,
 );
 
 
