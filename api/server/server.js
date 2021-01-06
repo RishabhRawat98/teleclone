@@ -15,7 +15,7 @@ const express = require('express')
 const server = express();
 
 const cors = require('cors');
-const bodyParser = require('body-parser')
+const bodyParser = require('body-parser');
 
 const { Pool } = require("pg");
 const pool = new Pool();
@@ -53,16 +53,16 @@ server.get('/', (req, res) => {
 //     }
 // })
 
-// app.post('/cats', async (req, res) => {
-//     try {
-//         const q = `INSERT INTO cats (name, age) VALUES ($1, $2) RETURNING *;`;
-//         const dbData = await run(q, [req.body.name, req.body.age]);
-//         const newCat = dbData.rows[0];
-//         res.status(201).json(newCat);
-//     } catch(err) {
-//         console.err(err);
-//         res.status(500).end();
-//     }   
-// })
+server.post('/post', async (req, res) => {
+    try {
+        const q = `INSERT INTO tele (title, user, article, ts) VALUES (${title}, ${user}, ${body}) RETURNING *;`;
+        const dbData = await run(q, [req.body.title, req.body.user, req.body.article]);
+        const newPost = dbData.rows[0];
+        res.status(201).json(newPost);
+    } catch(err) {
+        console.err(err);
+        res.status(500).end();
+    }   
+})
 
 server.listen(3000, () => console.log('serving on 3000'))
