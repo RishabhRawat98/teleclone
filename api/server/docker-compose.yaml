@@ -1,11 +1,11 @@
-version: '3'
+version: "3"
 services:
   server:
     image: node:12.18.4
     working_dir: /server
-    ports: 
+    ports:
       - 3000:3000
-    environment: 
+    environment:
       - PGUSER=PaoRO
       - PGHOST=db
       - PGPASSWORD=telepass
@@ -25,8 +25,8 @@ services:
       - 35432:5432
     volumes:
       - "dbdata:/var/lib/postgresql/data"
-      - "./db/seeds.sql:/docker-entrypoint-initdb.d/seeds.sql:ro"
-    environment: 
+      - "../db/seeds.sql:/docker-entrypoint-initdb.d/seeds.sql:ro"
+    environment:
       - POSTGRES_DB=tele
       - POSTGRES_USER=PaoRO
       - POSTGRES_PASSWORD=telepass

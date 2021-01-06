@@ -56,7 +56,7 @@ server.get('/', (req, res) => {
 //removed async
 server.post('/post',  (req, res) => {
     try {
-        const q = `INSERT INTO tele (title, user, article) VALUES (${title}, ${user}, ${body}) RETURNING *;`;
+        const q = (SQL`INSERT INTO tele (title, user, article) VALUES (${title}, ${user}, ${body}) RETURNING *;`);
        //removed await before run
         const dbData =  run(q, [req.body.title, req.body.user, req.body.article]);
         const newPost = dbData.rows[0];
@@ -66,6 +66,16 @@ server.post('/post',  (req, res) => {
     } catch(err) {
         res.status(500).end();
     }   
+})
+
+server.get('/post', async(req, res) => {
+    try{
+        const postData = await run(SQL`SELECT * FROM tele;`);
+        const post = postData.rows.map(p => ({title: p.title, user: p.user, article: p.article}));
+        res.json({post});
+    }catch(err){
+        res.status(500).json({err});
+    }
 })
 
 server.listen(3000, () => console.log('serving on 3000'))
