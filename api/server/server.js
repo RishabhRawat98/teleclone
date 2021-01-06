@@ -53,14 +53,17 @@ server.get('/', (req, res) => {
 //     }
 // })
 
-server.post('/post', async (req, res) => {
+//removed async
+server.post('/post',  (req, res) => {
     try {
-        const q = `INSERT INTO tele (title, user, article, ts) VALUES (${title}, ${user}, ${body}) RETURNING *;`;
-        const dbData = await run(q, [req.body.title, req.body.user, req.body.article]);
+        const q = `INSERT INTO tele (title, user, article) VALUES (${title}, ${user}, ${body}) RETURNING *;`;
+       //removed await before run
+        const dbData =  run(q, [req.body.title, req.body.user, req.body.article]);
         const newPost = dbData.rows[0];
-        res.status(201).json(newPost);
+        // res.status(201).json(newPost);
+        //res.status(201).send('info received')
+        res.json(newPost);
     } catch(err) {
-        console.err(err);
         res.status(500).end();
     }   
 })
