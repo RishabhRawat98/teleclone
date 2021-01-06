@@ -8,17 +8,17 @@
 
 // server.get('/', (req, res) => res.send('Welcome to our app!'))
 
-//  module.exports = server
+//  module.exports = ser
 
-
-const express = require('express')
+const SQL = require('sql-template-strings');
+const express = require('express');
 const server = express();
 
 const cors = require('cors');
 const bodyParser = require('body-parser');
 
 const { Pool } = require("pg");
-const pool = new Pool();
+const pool = new Pool({database: 'tele'});
 
 const run = (q, values, callback) => pool.query(q, values, callback);
 
@@ -53,16 +53,20 @@ server.get('/', (req, res) => {
 //     }
 // })
 
+server.get('/post', (req, res) => {
+    res.send('Hello here!')
+})
+
 //removed async
-server.post('/post',  (req, res) => {
+server.post('/post', async (req, res) => {
     try {
-        const q = `INSERT INTO tele (title, user, article) VALUES (${title}, ${user}, ${body}) RETURNING *;`;
+        const q = SQL`INSERT INTO tele (title, userName, article) VALUES ('title', 'userName', 'body') RETURNING *;`;
        //removed await before run
-        const dbData =  run(q, [req.body.title, req.body.user, req.body.article]);
+        const dbData = await run( q, [req.body.title, req.body.userName, req.body.article]);
         const newPost = dbData.rows[0];
-        // res.status(201).json(newPost);
+        res.status(201).json(newPost);
         //res.status(201).send('info received')
-        res.json(newPost);
+        //res.json(newPost);
     } catch(err) {
         res.status(500).end();
     }   

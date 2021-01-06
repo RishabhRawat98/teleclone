@@ -15,17 +15,17 @@ services:
       - db
     volumes:
       - type: bind
-        source: ./
+        source: ./server
         target: /server
     command: bash -c "npm install && npm start"
 
   db:
-    image: postgres:latest
+    image: postgres:12-alpine
     ports:
       - 35432:5432
     volumes:
       - "dbdata:/var/lib/postgresql/data"
-      - "./db/seeds.sql:/docker-entrypoint-initdb.d/seeds.sql:ro"
+      - "./db/seed.sql:/docker-entrypoint-initdb.d/seed.sql:ro"
     environment: 
       - POSTGRES_DB=tele
       - POSTGRES_USER=PaoRO

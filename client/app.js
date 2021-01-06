@@ -6,7 +6,7 @@ function handler (e) {
     e.preventDefault();
     const articleData = {
         title: e.target.title.value,
-        user: e.target.author.value,
+        userName: e.target.author.value,
         article: e.target.article.value,
         //ts: Date.now(),
     };
@@ -18,7 +18,7 @@ function handler (e) {
 
     fetch("http://localhost:3000/post", options)
             .then(res => (res).json())
-            .then(() => appendArticle(articleData))
+            .then(appendArticle(articleData))
             .catch((error) => {
                 console.error('Error:', error)
             })  
