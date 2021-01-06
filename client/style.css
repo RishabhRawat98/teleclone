@@ -1,0 +1,28 @@
+*{
+    box-sizing: border-box;
+}
+
+
+#form{
+    display: flex;
+    flex-direction: column;
+    justify-content:flex-start;
+    width:50%;
+    margin: auto;
+}
+
+
+#title, #author, #article{
+    border: none;
+    margin: 1rem;
+    padding: 0.5rem;
+}
+
+#submitbtn{
+    width: 5rem;
+    margin: 1rem;
+    border: 0.1rem solid black;
+    color: black;
+    background-color: transparent;
+    border-radius: 20px;
+}
